@@ -49,6 +49,7 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 
 gem 'devise'
+gem 'devise-i18n'
 
 gem 'bootstrap', '~> 5.2.2'
 gem 'bootstrap_form', '~> 5.1'
