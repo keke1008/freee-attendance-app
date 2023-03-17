@@ -2,6 +2,22 @@
   <%= @employee.name %>
 </h1>
 
+<% if @is_in_attendance %>
+  <%= button_to punch_out_employee_path,
+                method: :patch,
+                class: 'btn btn-primary',
+                form_class: 'd-grid my-4' do %>
+    <h1 class="display-1"><strong>退勤する</strong></h1>
+  <% end %>
+<% else %>
+  <%= button_to punch_in_employee_path,
+                method: :patch,
+                class: 'btn btn-primary',
+                form_class: 'd-grid my-4' do %>
+    <h1 class="display-1"><strong>出勤する</strong></h1>
+  <% end %>
+<% end %>
+
 <%= button_to t('common.change_setting'),
               edit_employee_registration_path,
               method: :get,

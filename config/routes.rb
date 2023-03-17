@@ -11,7 +11,10 @@ Rails.application.routes.draw do
     sessions: 'employees/sessions'
   }
 
-  resource :employee
+  resource :employee do
+    patch 'punch_in', as: :punch_in
+    patch 'punch_out', as: :punch_out
+  end
 
   root 'root#index'
 end
