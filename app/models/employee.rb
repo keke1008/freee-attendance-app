@@ -9,6 +9,8 @@ end
 # マネージャーのもとで働く人を表す
 class Employee < ApplicationRecord
   belongs_to :manager
+  has_one :ongoing_attendance, required: true, dependent: :destroy
+  has_many :attendances, dependent: :destroy
 
   validates :name, presence: true
   validates_with ManagerIdValidator
