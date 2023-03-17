@@ -1,0 +1,8 @@
+<h1>
+  <%= @employee.name %>
+</h1>
+
+<%= button_to t('common.change_setting'),
+              edit_employee_registration_path,
+              method: :get,
+              class: 'btn btn-primary' %>
