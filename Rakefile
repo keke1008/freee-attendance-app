@@ -4,3 +4,8 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+
+task fmt: :environment do
+  sh 'bundle exec rubocop -a'
+  sh 'bundle exec erblint --lint-all -a'
+end
