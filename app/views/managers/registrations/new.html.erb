@@ -3,18 +3,11 @@
 </h2>
 
 <%= bootstrap_form_with(model: @manager, url: registration_path(resource_name), local: true) do |f| %>
-  <%= f.text_field :name,
-                   autocomplete: 'name',
-                   label: t('manager.name'),
-                   autofocus: true %>
+  <%= f.text_field :name, autocomplete: 'name', autofocus: true %>
 
-  <%= f.text_field :store_name,
-                   autocomplete: 'name',
-                   label: t('manager.store_name') %>
+  <%= f.text_field :store_name, autocomplete: 'name' %>
 
-  <%= f.email_field :email,
-                    autocomplete: 'email',
-                    label: t('common.email_address') %>
+  <%= f.email_field :email, autocomplete: 'email' %>
 
   <%= f.password_field :password,
                        autocomplete: 'new-password',

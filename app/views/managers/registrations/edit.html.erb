@@ -1,22 +1,12 @@
 <h2><%= t('common.account_setting') %></h2>
 
 <%= bootstrap_form_with(model: @manager, url: registration_path(resource_name), local: true) do |f| %>
-  <%= f.text_field :name,
-                   autocomplete: 'name',
-                   label: t('manager.name'),
-                   autofocus: true %>
-
-  <%= f.text_field :store_name,
-                   autocomplete: 'name',
-                   label: t('manager.store_name') %>
-
-  <%= f.email_field :email,
-                    autocomplete: 'email',
-                    label: t('common.email_address') %>
+  <%= f.text_field :name, autocomplete: 'name', autofocus: true %>
+  <%= f.text_field :store_name, autocomplete: 'name' %>
+  <%= f.email_field :email, autocomplete: 'email' %>
 
   <%= f.password_field :current_password,
                        autocomplete: 'current-password',
-                       label: t('common.current_password'),
                        help: "#{@minimum_password_length} characters minimum" %>
 
   <%= f.password_field :password,
@@ -24,9 +14,7 @@
                        label: t('common.new_password'),
                        help: "#{@minimum_password_length} characters minimum" %>
 
-  <%= f.password_field :password_confirmation,
-                       autocomplete: 'new-password',
-                       label: t('common.password_confirmation') %>
+  <%= f.password_field :password_confirmation, autocomplete: 'new-password' %>
 
   <%= f.primary t('common.update') %>
 <% end %>
