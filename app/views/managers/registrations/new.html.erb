@@ -1,0 +1,34 @@
+<h2>
+  <%= t('common.sign_up') %>
+</h2>
+
+<%= bootstrap_form_with(model: @manager, url: registration_path(resource_name), local: true) do |f| %>
+  <%= f.text_field :name,
+                   autocomplete: 'name',
+                   label: t('manager.name'),
+                   autofocus: true %>
+
+  <%= f.text_field :store_name,
+                   autocomplete: 'name',
+                   label: t('manager.store_name') %>
+
+  <%= f.email_field :email,
+                    autocomplete: 'email',
+                    label: t('common.email_address') %>
+
+  <%= f.password_field :password,
+                       autocomplete: 'new-password',
+                       label: t('common.password'),
+                       help: "#{@minimum_password_length} characters minimum" %>
+
+  <%= f.password_field :password_confirmation,
+                       autocomplete: 'new-password',
+                       label: t('common.password_confirmation') %>
+
+  <%= f.primary t('common.sign_up') %>
+<% end %>
+
+<%= button_to t('common.sign_in'),
+              new_session_path(resource_name),
+              method: :get,
+              class: 'btn btn-secondary my-4' %>

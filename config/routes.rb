@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   devise_for :employees
-  devise_for :managers
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  devise_for :managers, path: 'manager', controllers: {
+    registrations: 'managers/registrations',
+    sessions: 'managers/sessions'
+  }
+
+  resource :manager
+
+  root 'root#index'
 end
