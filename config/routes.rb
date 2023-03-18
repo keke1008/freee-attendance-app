@@ -4,14 +4,20 @@ Rails.application.routes.draw do
     sessions: 'managers/sessions'
   }
 
-  resource :manager
+  resource :manager, only: :show do
+    get 'attendances/:employee_id', action: :attendances
+
+    resources :employees, controller: 'managers/employees', only: :show do
+      resources :attendances, controller: 'managers/employees/attendances', only: :index
+    end
+  end
 
   devise_for :employees, path: 'employee', controllers: {
     registrations: 'employees/registrations',
     sessions: 'employees/sessions'
   }
 
-  resource :employee do
+  resource :employee, only: :show do
     patch 'punch_in', as: :punch_in
     patch 'punch_out', as: :punch_out
   end

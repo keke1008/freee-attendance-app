@@ -1,0 +1,40 @@
+<h1>
+  <%= @employee.name %>
+</h1>
+
+<h2>
+  <%= t('common.attendance_list') %>
+</h2>
+
+<div class="d-flex justify-content-evenly">
+  <%= link_to t('common.go_previous'),
+              manager_employee_path(date: @previous_date),
+              method: :get %>
+
+  <h2>
+    <%= @current_date.strftime '%Y/%m' %>
+  </h2>
+
+  <%= link_to t('common.go_next'),
+              manager_employee_path(date: @next_date),
+              method: :get %>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"><%= t('common.punch_in') %></th>
+      <th scope="col"><%= t('common.punch_out') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @attendances.each_with_index do |attendance, index| %>
+      <tr>
+        <th scope="row"><%= index + 1 %></th>
+        <td><%= attendance.begin_at %></td>
+        <td><%= attendance.end_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

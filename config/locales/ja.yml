@@ -9,6 +9,15 @@ ja:
     delete_account: アカウントを削除する
     delete_confirm: 本当に削除しますか？
     back: 戻る
+    punch_in: 出勤時間
+    punch_out: 退勤時間
+    go_next: 次へ
+    go_previous: 前へ
+    employee: 従業員
+    employee_list: 従業員一覧
+    name: 名前
+    attendance: 勤怠
+    attendance_list: 勤怠一覧
 
   helpers:
     submit:

@@ -5,4 +5,14 @@
 <%= button_to t('common.change_setting'),
               edit_manager_registration_path,
               method: :get,
-              class: 'btn btn-primary' %>
+              class: 'btn btn-primary my-4' %>
+
+<h2><%= t('common.employee_list') %></h2>
+
+<ol class="list-group">
+  <% for employee in @employees %>
+    <li class="list-group-item">
+      <%= link_to employee.name, manager_employee_path(employee) %>
+    </li>
+  <% end %>
+</ol>
