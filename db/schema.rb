@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_17_143849) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_20_153500) do
   create_table "attendances", force: :cascade do |t|
     t.integer "employee_id", null: false
     t.datetime "begin_at", null: false
@@ -57,7 +57,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_143849) do
     t.index ["employee_id"], name: "index_ongoing_attendances_on_employee_id"
   end
 
+  create_table "shifts", force: :cascade do |t|
+    t.integer "employee_id", null: false
+    t.datetime "begin_at", null: false
+    t.datetime "end_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_shifts_on_employee_id"
+  end
+
   add_foreign_key "attendances", "employees"
   add_foreign_key "employees", "managers"
   add_foreign_key "ongoing_attendances", "employees"
+  add_foreign_key "shifts", "employees"
 end

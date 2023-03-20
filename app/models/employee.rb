@@ -11,6 +11,7 @@ class Employee < ApplicationRecord
   belongs_to :manager
   has_one :ongoing_attendance, required: false, dependent: :destroy
   has_many :attendances, dependent: :destroy
+  has_many :shifts, dependent: :destroy
 
   validates :name, presence: true
   validates_with ManagerIdValidator

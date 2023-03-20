@@ -28,6 +28,7 @@ ja:
   errors:
     messages:
       manager_not_found: マネージャーが見つかりませんでした
+      shift_overlapped: 重複するシフトが存在します
 
   date:
     formats:
