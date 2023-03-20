@@ -28,3 +28,7 @@ ja:
   errors:
     messages:
       manager_not_found: マネージャーが見つかりませんでした
+
+  date:
+    formats:
+      year_month: "%Y/%m"
