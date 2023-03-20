@@ -21,5 +21,7 @@ module AttendanceApp
 
     config.i18n.default_locale = :ja
     config.i18n.fallbacks = [:en]
+
+    config.time_zone = 'Tokyo'
   end
 end
