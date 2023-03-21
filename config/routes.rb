@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :shifts
   devise_for :managers, path: 'manager', controllers: {
     registrations: 'managers/registrations',
     sessions: 'managers/sessions'
@@ -10,6 +9,7 @@ Rails.application.routes.draw do
 
     resources :employees, controller: 'managers/employees', only: :show do
       resources :attendances, controller: 'managers/employees/attendances', only: :index
+      resources :shifts, controller: 'managers/employees/shifts', except: :index
     end
   end
 

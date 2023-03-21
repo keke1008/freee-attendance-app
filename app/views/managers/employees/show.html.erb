@@ -2,39 +2,49 @@
   <%= @employee.name %>
 </h1>
 
-<h2>
-  <%= t('common.attendance_list') %>
-</h2>
+<div class="card shadow">
+  <%= turbo_frame_tag 'shift-list' do %>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h2><%= t('common.shift_list') %></h2>
 
-<div class="d-flex justify-content-evenly">
-  <%= link_to t('common.go_previous'),
-              manager_employee_path(date: @previous_date),
-              method: :get %>
+      <div class="d-flex justify-content-center gap-3">
+        <h3>
+          <%= date_pagination_current_span(@page) %></h3>
+        <%= date_pagination_go_back_current_nav(@page) %>
+      </div>
 
-  <h2>
-    <%= @current_date.strftime '%Y/%m' %>
-  </h2>
+      <%= date_pagination_span_nav @page %>
+    </div>
 
-  <%= link_to t('common.go_next'),
-              manager_employee_path(date: @next_date),
-              method: :get %>
+    <div class="card-body">
+      <div class="container">
+        <div class="row border-bottom pb-2">
+          <div class="col-4">
+            <%= t('activerecord.attributes.shift.begin_at') %>
+          </div>
+          <div class="col-4">
+            <%= t('activerecord.attributes.shift.end_at') %>
+          </div>
+          <div class="col-4 d-flex justify-content-end gap-2">
+            <%= link_to t('common.add'),
+                        new_manager_employee_shift_path(@employee),
+                        class: 'btn btn-sm btn-outline-primary',
+                        data: { turbo_frame: dom_id(Shift.new) } %>
+            <div class="d-flex justify-content-end">
+              <%= date_pagination_date_nav @page %>
+            </div>
+          </div>
+        </div>
+
+        <%= turbo_frame_tag Shift.new %>
+
+        <div id="shifts">
+          <%= render partial: 'managers/employees/shifts/shift',
+                     collection: @shifts,
+                     as: :shift %>
+        </div>
+      </div>
+
+    </div>
+  <% end %>
 </div>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col"><%= t('common.punch_in') %></th>
-      <th scope="col"><%= t('common.punch_out') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @attendances.each_with_index do |attendance, index| %>
-      <tr>
-        <th scope="row"><%= index + 1 %></th>
-        <td><%= attendance.begin_at %></td>
-        <td><%= attendance.end_at %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>

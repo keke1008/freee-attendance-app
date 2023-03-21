@@ -1,12 +1,15 @@
 class Managers::EmployeesController < ApplicationController
+  include DatePagination
+
   before_action :set_employee
 
   def show
-    date = params.permit(:date)&.[](:date)&.to_date || Time.current
-    @attendances = @employee.attendances.where(begin_at: date.all_month)
-    @current_date = date
-    @next_date = date.since(1.month).to_s
-    @previous_date = date.ago(1.month).to_s
+    @page = paginate
+    date_range = @page.date_range
+    @attendances = @employee.attendances.where(begin_at: @page.date_range)
+    @shifts = @employee.shifts
+                       .where('begin_at <= ? AND end_at >= ?', date_range.last, date_range.first)
+                       .order(:bgin_at)
   end
 
   private

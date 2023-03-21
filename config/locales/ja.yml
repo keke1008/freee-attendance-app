@@ -5,7 +5,9 @@ ja:
     sign_in: ログイン
     update: 更新
     edit: 編集
+    add: 追加
     delete: 削除
+    cancel: キャンセル
     change_setting: 設定の変更
     account_setting: アカウント設定
     delete_account: アカウントを削除する
@@ -22,6 +24,7 @@ ja:
     attendance: 勤怠
     attendance_list: 勤怠一覧
     attendance_time: 出勤時間
+    shift_list: シフト一覧
 
   helpers:
     submit:
@@ -45,3 +48,12 @@ ja:
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
+
+  activerecord:
+    attributes:
+      range: &range
+        begin_at: 開始日時
+        end_at: 終了日時
+      shift: *range
+    models:
+      shift: シフト
