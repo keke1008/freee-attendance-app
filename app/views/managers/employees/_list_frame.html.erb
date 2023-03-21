@@ -1,0 +1,22 @@
+<div class="col-xl-6 px-xl-1">
+  <div class="card shadow flex-fill my-2">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="lead"><%= title %></div>
+
+      <div class="d-flex justify-content-center gap-2">
+        <div class="lead">
+          <%= date_pagination_current_span(@page) %>
+        </div>
+        <%= date_pagination_go_back_current_nav(@page) %>
+      </div>
+
+      <%= date_pagination_span_nav @page %>
+    </div>
+
+    <div class="card-body">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</div>

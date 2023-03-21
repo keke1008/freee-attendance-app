@@ -6,7 +6,9 @@ class Managers::EmployeesController < ApplicationController
   def show
     @page = paginate
     date_range = @page.date_range
-    @attendances = @employee.attendances.where(begin_at: @page.date_range)
+    @attendances = @employee.attendances
+                            .where('begin_at <= ? AND end_at >= ?', date_range.last, date_range.first)
+                            .order(:bgin_at)
     @shifts = @employee.shifts
                        .where('begin_at <= ? AND end_at >= ?', date_range.last, date_range.first)
                        .order(:bgin_at)

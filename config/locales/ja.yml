@@ -55,5 +55,6 @@ ja:
         begin_at: 開始日時
         end_at: 終了日時
       shift: *range
+      attendance: *range
     models:
       shift: シフト

@@ -1,23 +1,40 @@
 class Managers::Employees::AttendancesController < ApplicationController
-  before_action :set_employee
+  before_action :set_manager_and_employee
+  before_action :set_attendance, only: %i[show edit update destroy]
 
-  def index
-    date = params.permit(:date)&.[](:date)&.to_date || Time.current
-    @attendances = @employee.attendances.where(begin_at: date.all_month)
-    @current_date = date
-    @next_date = date.since(1.month).to_s
-    @previous_date = date.ago(1.month).to_s
+  def show; end
+
+  def new
+    @attendance = Attendance.new
+  end
+
+  def edit; end
+
+  def create
+    @attendance = Attendance.new(attendance_params)
+    @attendance.employee = @employee
+    return if @attendance.save
+
+    render :new, status: :unprocessable_entity
+  end
+
+  def update
+    return if @attendance.update(attendance_params)
+
+    render :edit, status: :unprocessable_entity
+  end
+
+  def destroy
+    @attendance.destroy
   end
 
   private
 
-  def set_employee
-    if current_manager.nil?
-      redirect_to root_path
-      return
-    end
+  def attendance_params
+    params.require(:attendance).permit(:begin_at, :end_at)
+  end
 
-    employee_id = params.permit(:employee_id)[:employee_id]
-    @employee = current_manager.employee.find(employee_id)
+  def set_attendance
+    @attendance = Attendance.find(params[:id])
   end
 end

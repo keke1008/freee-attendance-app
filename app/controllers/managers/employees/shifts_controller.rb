@@ -34,17 +34,6 @@ class Managers::Employees::ShiftsController < ApplicationController
     params.require(:shift).permit(:begin_at, :end_at)
   end
 
-  def set_manager_and_employee
-    if current_manager.nil?
-      redirect_to root_path
-      return
-    end
-
-    @manager = current_manager
-    employee_id = params[:employee_id]
-    @employee = current_manager.employee.find(employee_id)
-  end
-
   def set_shift
     @shift = Shift.find(params[:id])
   end

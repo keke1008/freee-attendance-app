@@ -2,49 +2,62 @@
   <%= @employee.name %>
 </h1>
 
-<div class="card shadow">
-  <%= turbo_frame_tag 'shift-list' do %>
-    <div class="card-header d-flex justify-content-between align-items-center">
-      <h2><%= t('common.shift_list') %></h2>
-
-      <div class="d-flex justify-content-center gap-3">
-        <h3>
-          <%= date_pagination_current_span(@page) %></h3>
-        <%= date_pagination_go_back_current_nav(@page) %>
-      </div>
-
-      <%= date_pagination_span_nav @page %>
-    </div>
-
-    <div class="card-body">
-      <div class="container">
-        <div class="row border-bottom pb-2">
-          <div class="col-4">
-            <%= t('activerecord.attributes.shift.begin_at') %>
-          </div>
-          <div class="col-4">
-            <%= t('activerecord.attributes.shift.end_at') %>
-          </div>
-          <div class="col-4 d-flex justify-content-end gap-2">
-            <%= link_to t('common.add'),
-                        new_manager_employee_shift_path(@employee),
-                        class: 'btn btn-sm btn-outline-primary',
-                        data: { turbo_frame: dom_id(Shift.new) } %>
-            <div class="d-flex justify-content-end">
-              <%= date_pagination_date_nav @page %>
-            </div>
-          </div>
+<%= turbo_frame_tag 'shifts-and-attendances' do %>
+  <div class="w-100 d-flex flex-column flex-xl-row justify-content-between">
+    <%= render 'list_frame', title: t('common.shift_list') do %>
+      <div class="row border-bottom border-3 pb-2">
+        <div class="col-4">
+          <%= t('activerecord.attributes.shift.begin_at') %>
         </div>
-
-        <%= turbo_frame_tag Shift.new %>
-
-        <div id="shifts">
-          <%= render partial: 'managers/employees/shifts/shift',
-                     collection: @shifts,
-                     as: :shift %>
+        <div class="col-4">
+          <%= t('activerecord.attributes.shift.end_at') %>
+        </div>
+        <div class="col-4 d-flex justify-content-end gap-2">
+          <%= link_to t('common.add'),
+                      new_manager_employee_shift_path(@employee),
+                      class: 'btn btn-sm btn-outline-primary',
+                      data: { turbo_frame: dom_id(Shift.new) } %>
+          <div class="d-flex justify-content-end">
+            <%= date_pagination_date_nav @page %>
+          </div>
         </div>
       </div>
 
-    </div>
-  <% end %>
-</div>
+      <%= turbo_frame_tag Shift.new %>
+
+      <div id="shifts">
+        <%= render partial: 'managers/employees/shifts/shift',
+                   collection: @shifts,
+                   as: :shift %>
+      </div>
+    <% end %>
+
+    <%= render 'list_frame', title: t('common.attendance_list') do %>
+      <div class="row border-bottom border-3 pb-2">
+        <div class="col-4">
+          <%= t('activerecord.attributes.attendance.begin_at') %>
+        </div>
+        <div class="col-4">
+          <%= t('activerecord.attributes.attendance.end_at') %>
+        </div>
+        <div class="col-4 d-flex justify-content-end gap-2">
+          <%= link_to t('common.add'),
+                      new_manager_employee_attendance_path(@employee),
+                      class: 'btn btn-sm btn-outline-primary',
+                      data: { turbo_frame: dom_id(Attendance.new) } %>
+          <div class="d-flex justify-content-end">
+            <%= date_pagination_date_nav @page %>
+          </div>
+        </div>
+      </div>
+
+      <%= turbo_frame_tag Attendance.new %>
+
+      <div id="attendances">
+        <%= render partial: 'managers/employees/attendances/attendance',
+                   collection: @attendances,
+                   as: :attendance %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
