@@ -25,6 +25,7 @@ ja:
     attendance_list: 勤怠一覧
     attendance_time: 出勤時間
     shift_list: シフト一覧
+    shift: シフト
 
   helpers:
     submit:
@@ -44,6 +45,7 @@ ja:
   datetime:
     prompts:
       week: 週
+      hours: 時間
 
   time:
     formats:

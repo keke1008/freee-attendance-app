@@ -5,35 +5,52 @@ class ManagersController < ApplicationController
 
   def show
     @page = paginate
+    @graph_data = collect_graph_data(@page.date_range)
     @employees = @manager.employee
-    @employees_attendances = aggrigate_total_attendance_minute(@page.date_range)
   end
 
   private
 
-  # { 従業員名 => block(従業員の出勤記録の配列) } を返す
-  def aggrigate_employees_attendances(range)
+  # rangeと重複しているデータを返す
+  def overlapped_data(range)
+    cond = { begin_at: ..range.last, end_at: range.first.. }
     @manager.employee
-            .includes(:attendances)
-            .where(attendances: { begin_at: range })
-            .map.to_h do |employee|
-              [employee.name, yield(employee.attendances)]
-            end
+            .includes(:attendances, :shifts)
+            .where(attendances: cond, shifts: cond)
   end
 
-  # { 従業員名 => 出勤時間の合計(分) } を返す
-  def aggrigate_total_attendance_minute(range)
-    # 従業員名 => 出勤時間の合計(分)
-    employees_attendances = aggrigate_employees_attendances(range) do |attendances|
-      seconds = attendances
-                .map { |attendance| attendance.end_at - attendance.begin_at }
-                .sum
-      (seconds / 60).ceil # 秒 => 分
+  # block: (秒数[]) => T
+  # { attendance: { 従業員名 => T }, shift: { 従業員名 => T } } を返す
+  def collect_record_with(range)
+    data = { attendance: {}, shift: {} }
+    overlapped_data(range).each do |employee|
+      data[:attendance][employee.name] = yield(employee.attendances)
+      data[:shift][employee.name] = yield(employee.shifts)
     end
+    data
+  end
 
-    # date_range内で出勤しなかった従業員の出勤時間を0に
-    @manager.employee.each { |employee| employees_attendances[employee.name] ||= 0 }
+  # collect_record_withの戻り値の単位を，秒から時間に変換する
+  def collect_record_hours(range)
+    collect_record_with(range) do |records|
+      seconds = records
+                .map { |record| record.end_at - record.begin_at }
+                .sum
+      (seconds / 60 / 60).ceil(1) # 秒 => 時間
+    end
+  end
 
-    employees_attendances
+  # グラフの入力データを返す
+  def collect_graph_data(range)
+    data = collect_record_hours(range)
+
+    @manager.employee.each do |employee|
+      data[:shift][employee.name] ||= 0
+      data[:attendance][employee.name] ||= 0
+    end
+    [
+      { name: I18n.t('common.shift'), data: data[:shift] },
+      { name: I18n.t('common.attendance_time'), data: data[:attendance] }
+    ]
   end
 end
