@@ -1,0 +1,8 @@
+<%# 間隔を変更するボタン群 %>
+<div class="btn-group">
+  <% nav_props.each do |props| %>
+    <%= link_to props.name,
+                props.link_param,
+                class: props.current? ? 'btn btn-primary' : 'btn btn-outline-primary' %>
+  <% end %>
+</div>

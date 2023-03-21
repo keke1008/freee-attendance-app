@@ -15,6 +15,7 @@ ja:
     punch_out: 退勤時間
     go_next: 次へ
     go_previous: 前へ
+    go_back_today: 今日に戻る
     employee: 従業員
     employee_list: 従業員一覧
     name: 名前

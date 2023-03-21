@@ -11,13 +11,28 @@
   </div>
 </div>
 
-<%= render layout: 'concerns/span_pagination', locals: {
-      turbo_frame_id: 'attendaces-chart',
-      title: t('common.attendance_time')
-    } do %>
+<div class="card shadow">
+  <%= turbo_frame_tag 'attendances-chart' do %>
+    <div class="card-header d-flex justify-content-between">
+      <h2><%= t('common.attendance_time') %></h2>
 
-  <%= column_chart @employees_attendances, suffix: t('datetime.prompts.minute') %>
-<% end %>
+      <%= date_pagination_span_nav @page %>
+    </div>
+
+    <div class="card-body">
+      <div class="d-flex justify-content-center gap-3">
+        <h3><%= date_pagination_current_span(@page) %></h3>
+        <%= date_pagination_go_back_current_nav(@page) %>
+      </div>
+
+      <%= column_chart @employees_attendances, suffix: t('datetime.prompts.minute') %>
+
+      <div class="d-flex justify-content-end">
+        <%= date_pagination_date_nav @page %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <h2><%= t('common.employee_list') %></h2>
 
