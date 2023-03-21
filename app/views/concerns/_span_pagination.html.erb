@@ -1,0 +1,46 @@
+<%# Controllers::Concerns::SpanPaginationと合わせて使用する  %>
+
+<div class="card shadow">
+  <%= turbo_frame_tag turbo_frame_id do %>
+    <div class="card-header d-flex justify-content-between">
+      <h2><%= title %></h2>
+
+      <%# 表示する間隔を変更するボタン %>
+      <div class="d-flex btn-group">
+        <% @pagination[:link_params][:spans].each do |span| %>
+          <%= link_to t("datetime.prompts.#{span[:name]}"),
+                      manager_path(span[:params]),
+                      class: span[:current?] ? 'btn btn-primary' : 'btn btn-outline-primary' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <%# 前のデータを表示するボタン  %>
+      <div class="d-flex justify-content-evenly">
+        <%= link_to t('common.go_previous'),
+                    manager_path(@pagination[:link_params][:previous]),
+                    method: :get,
+                    class: 'btn btn-outline-primary' %>
+
+        <div class="d-flex">
+          <%# 現在の表示しているデータの日付  %>
+          <h3><%= @pagination[:current_span_string] %></h3>
+
+          <%# 今日に戻るボタン %>
+          <%= link_to t('common.back'),
+                      manager_path(@pagination[:link_params][:now]),
+                      class: 'btn btn-outline-primary mx-4' %>
+        </div>
+
+        <%# 次のデータを表示するボタン  %>
+        <%= link_to t('common.go_next'),
+                    manager_path(@pagination[:link_params][:next]),
+                    method: :get,
+                    class: 'btn btn-outline-primary' %>
+      </div>
+
+      <%= yield %>
+    </div>
+  <% end %>
+</div>
