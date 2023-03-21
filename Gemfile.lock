@@ -165,7 +165,6 @@ GEM
     nokogiri (1.14.2-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    pagy (6.0.2)
     parallel (1.22.1)
     parser (3.2.1.1)
       ast (~> 2.4.1)
@@ -300,7 +299,6 @@ DEPENDENCIES
   erb_lint
   importmap-rails
   jbuilder
-  pagy
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
   rails-i18n (~> 7.0.0)
