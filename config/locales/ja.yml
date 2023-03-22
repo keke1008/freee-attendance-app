@@ -54,13 +54,11 @@ ja:
 
   activerecord:
     attributes:
-      shift:
-        begin_at: 開始日時
-        end_at: 終了日時
-      attendance:
+      attendance: &attendance
         date: 出勤日
         begin_at: 出勤時間
         end_at: 退勤時間
+      shift: *attendance
 
     models:
       shift: シフト

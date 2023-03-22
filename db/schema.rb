@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_22_141626) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_22_160948) do
   create_table "attendances", force: :cascade do |t|
     t.integer "employee_id", null: false
     t.time "begin_at", precision: 6, null: false
@@ -61,10 +61,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_141626) do
 
   create_table "shifts", force: :cascade do |t|
     t.integer "employee_id", null: false
-    t.datetime "begin_at", null: false
-    t.datetime "end_at", null: false
+    t.time "begin_at", precision: 6, null: false
+    t.time "end_at", precision: 6, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date", null: false
+    t.integer "duration_sec", null: false
     t.index ["employee_id"], name: "index_shifts_on_employee_id"
   end
 

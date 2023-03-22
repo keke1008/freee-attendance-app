@@ -1,7 +1,7 @@
 <%= turbo_frame_tag item do %>
   <div class="row border-bottom py-2">
     <div class="col-3">
-      <%= (item.respond_to? :date) && l(item.date) %>
+      <%= l(item.date) %>
     </div>
 
     <div class="col-3">

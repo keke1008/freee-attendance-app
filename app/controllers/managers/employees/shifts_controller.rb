@@ -31,7 +31,7 @@ class Managers::Employees::ShiftsController < ApplicationController
   private
 
   def shift_params
-    params.require(:shift).permit(:begin_at, :end_at)
+    params.require(:shift).permit(:date, :begin_at, :end_at)
   end
 
   def set_shift
