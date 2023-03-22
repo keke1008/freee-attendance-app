@@ -5,6 +5,8 @@ class Attendance < ApplicationRecord
   validates :end_at, comparison: { greater_than: :begin_at }
   validate :check_overlapping
 
+  scope :collect_duration_sec, -> { eager_load(:employee).group(:employee).sum(:duration_sec) }
+
   private
 
   def check_overlapping
