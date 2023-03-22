@@ -12,7 +12,7 @@ class Shift < ApplicationRecord
     return unless Shift
                   .where.not(id:) # 自身を除く
                   .where(employee:, date:) # 同じ従業員，同じ日
-                  .exists?(begin_at: ..end_at, end_at: begin_at..) # 重なっている
+                  .exists?(['begin_at < ? AND end_at > ?', end_at, begin_at]) # 重なっている
 
     errors.add(:begin_at, I18n.t('errors.messages.shift_overlapped'))
     errors.add(:end_at, I18n.t('errors.messages.shift_overlapped'))
