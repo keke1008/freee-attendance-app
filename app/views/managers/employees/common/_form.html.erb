@@ -1,21 +1,31 @@
 <%= turbo_frame_tag item do %>
   <%= bootstrap_form_with model: [:manager, @employee, item] do |f| %>
     <div class="row border-bottom py-2">
-      <div class="col-4">
-        <%= f.datetime_field :begin_at,
-                             skip_label: true,
-                             wrapper_class: false,
-                             data: { controller: 'flatpickr' } %>
+      <div class="col-3">
+        <%= f.date_field :date,
+                         skip_label: true,
+                         wrapper_class: false,
+                         data: { controller: 'flatpickr' },
+                         class: 'form-control-sm' %>
       </div>
 
-      <div class="col-4">
-        <%= f.datetime_field :end_at,
-                             skip_label: true,
-                             wrapper_class: false,
-                             data: { controller: 'flatpickr' } %>
+      <div class="col-3">
+        <%= f.time_field :begin_at,
+                         skip_label: true,
+                         wrapper_class: false,
+                         data: { controller: 'flatpickr', flatpickr_field_value: 'time' },
+                         class: 'form-control-sm' %>
       </div>
 
-      <div class="col-4">
+      <div class="col-3">
+        <%= f.time_field :end_at,
+                         skip_label: true,
+                         wrapper_class: false,
+                         data: { controller: 'flatpickr', flatpickr_field_value: 'time' },
+                         class: 'form-control-sm' %>
+      </div>
+
+      <div class="col-3">
         <div class="d-flex justify-content-end">
           <%= f.primary class: 'btn btn-sm btn-outline-primary ms-2' %>
           <%= link_to t('common.cancel'),

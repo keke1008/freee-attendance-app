@@ -7,11 +7,11 @@ class Managers::EmployeesController < ApplicationController
     @page = paginate
     date_range = @page.date_range
     @attendances = @employee.attendances
-                            .where('begin_at <= ? AND end_at >= ?', date_range.last, date_range.first)
-                            .order(:bgin_at)
+                            .where(date: date_range)
+                            .order(:begin_at)
     @shifts = @employee.shifts
                        .where('begin_at <= ? AND end_at >= ?', date_range.last, date_range.first)
-                       .order(:bgin_at)
+                       .order(:begin_at)
   end
 
   private

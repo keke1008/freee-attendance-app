@@ -31,7 +31,7 @@ class Managers::Employees::AttendancesController < ApplicationController
   private
 
   def attendance_params
-    params.require(:attendance).permit(:begin_at, :end_at)
+    params.require(:attendance).permit(:date, :begin_at, :end_at)
   end
 
   def set_attendance

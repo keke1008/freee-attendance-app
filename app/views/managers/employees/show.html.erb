@@ -3,7 +3,7 @@
 </h1>
 
 <%= turbo_frame_tag 'shifts-and-attendances' do %>
-  <div class="w-100 d-flex flex-column flex-xl-row justify-content-between">
+  <div class="w-100 d-flex flex-column flex-xxl-row justify-content-between">
     <%= render 'list_frame', title: t('common.shift_list') do %>
       <div class="row border-bottom border-3 pb-2">
         <div class="col-4">
@@ -34,13 +34,16 @@
 
     <%= render 'list_frame', title: t('common.attendance_list') do %>
       <div class="row border-bottom border-3 pb-2">
-        <div class="col-4">
+        <div class="col-3">
+          <%= t('activerecord.attributes.attendance.date') %>
+        </div>
+        <div class="col-3">
           <%= t('activerecord.attributes.attendance.begin_at') %>
         </div>
-        <div class="col-4">
+        <div class="col-3">
           <%= t('activerecord.attributes.attendance.end_at') %>
         </div>
-        <div class="col-4 d-flex justify-content-end gap-2">
+        <div class="col-3 d-flex justify-content-end gap-2">
           <%= link_to t('common.add'),
                       new_manager_employee_attendance_path(@employee),
                       class: 'btn btn-sm btn-outline-primary',

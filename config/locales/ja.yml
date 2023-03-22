@@ -37,6 +37,7 @@ ja:
     messages:
       manager_not_found: マネージャーが見つかりませんでした
       shift_overlapped: 重複するシフトが存在します
+      attendance_overlapped: 重複する勤怠が存在します
 
   date:
     formats:
@@ -49,14 +50,17 @@ ja:
 
   time:
     formats:
-      default: "%Y/%m/%d %H:%M:%S"
+      default: "%H:%M:%S"
 
   activerecord:
     attributes:
-      range: &range
+      shift:
         begin_at: 開始日時
         end_at: 終了日時
-      shift: *range
-      attendance: *range
+      attendance:
+        date: 出勤日
+        begin_at: 出勤時間
+        end_at: 退勤時間
+
     models:
       shift: シフト
