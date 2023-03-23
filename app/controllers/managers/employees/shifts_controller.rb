@@ -13,13 +13,19 @@ class Managers::Employees::ShiftsController < ApplicationController
   def create
     @shift = Shift.new(shift_params)
     @shift.employee = @employee
-    return if @shift.save
+    if @shift.save
+      @shift = Shift.eager_find(@shift.id)
+      return
+    end
 
     render :new, status: :unprocessable_entity
   end
 
   def update
-    return if @shift.update(shift_params)
+    if @shift.update(shift_params)
+      @shift = Shift.eager_find(@shift.id)
+      return
+    end
 
     render :edit, status: :unprocessable_entity
   end
@@ -35,6 +41,6 @@ class Managers::Employees::ShiftsController < ApplicationController
   end
 
   def set_shift
-    @shift = Shift.find(params[:id])
+    @shift = Shift.eager_find(params[:id])
   end
 end

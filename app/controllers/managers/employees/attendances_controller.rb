@@ -13,13 +13,19 @@ class Managers::Employees::AttendancesController < ApplicationController
   def create
     @attendance = Attendance.new(attendance_params)
     @attendance.employee = @employee
-    return if @attendance.save
+    if @attendance.save
+      @attendance = Attendance.eager_find(@attendance.id)
+      return
+    end
 
     render :new, status: :unprocessable_entity
   end
 
   def update
-    return if @attendance.update(attendance_params)
+    if @attendance.update(attendance_params)
+      @attendance = Attendance.eager_find(@attendance.id)
+      return
+    end
 
     render :edit, status: :unprocessable_entity
   end
@@ -35,6 +41,6 @@ class Managers::Employees::AttendancesController < ApplicationController
   end
 
   def set_attendance
-    @attendance = Attendance.find(params[:id])
+    @attendance = Attendance.eager_find(params[:id])
   end
 end
