@@ -1,6 +1,9 @@
-<h1>
-  <%= @employee.name %>
-</h1>
+<div class="d-flex justify-content-between">
+  <h1><%= @employee.name %></h1>
+  <div>
+    <%= link_to t('common.back'), manager_path, class: 'btn btn-outline-secondary' %>
+  </div>
+</div>
 
 <%= turbo_frame_tag 'shifts-and-attendances' do %>
   <div class="w-100 d-flex flex-column flex-xxl-row justify-content-between">

@@ -27,6 +27,7 @@ ja:
     attendance_time: 出勤時間
     shift_list: シフト一覧
     shift: シフト
+    employee_not_found: 従業員が所属していません．従業員のアカウントを作成する際に，マネージャーID(%{id})を入力することで所属できます．
 
   helpers:
     submit:

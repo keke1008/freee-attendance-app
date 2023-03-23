@@ -9,15 +9,14 @@
     <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
 
-    <%# flatpickr %>
     <link rel="stylesheet" href="https://ga.jspm.io/npm:flatpickr@4.6.9/dist/flatpickr.min.css">
   </head>
 
   <body>
-   <p class="notice"><%= notice %></p>
-   <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="p-4">
+      <%= yield %>
 
-    <%= turbo_frame_tag 'modal' %>
+      <%= turbo_frame_tag 'modal' %>
+    </div>
   </body>
 </html>

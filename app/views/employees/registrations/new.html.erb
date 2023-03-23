@@ -1,26 +1,30 @@
-<h2>
-  <%= t('common.sign_up') %>
-</h2>
+<div class="d-flex justify-content-center">
+  <div class="w-75">
+    <h2>
+      <%= t('common.sign_up') %>
+    </h2>
 
-<%= bootstrap_form_with(model: @employee, url: registration_path(resource_name), local: true) do |f| %>
-  <%= f.text_field :name,
-                   autocomplete: 'name',
-                   autofocus: true %>
+    <%= bootstrap_form_with(model: @employee, url: registration_path(resource_name), local: true) do |f| %>
+      <%= f.text_field :name,
+                       autocomplete: 'name',
+                       autofocus: true %>
 
-  <%= f.text_field :manager_id %>
+      <%= f.text_field :manager_id %>
 
-  <%= f.email_field :email, autocomplete: 'email' %>
+      <%= f.email_field :email, autocomplete: 'email' %>
 
-  <%= f.password_field :password,
-                       autocomplete: 'new-password',
-                       help: "#{@minimum_password_length} characters minimum" %>
+      <%= f.password_field :password,
+                           autocomplete: 'new-password',
+                           help: "#{@minimum_password_length} characters minimum" %>
 
-  <%= f.password_field :password_confirmation, autocomplete: 'new-password' %>
+      <%= f.password_field :password_confirmation, autocomplete: 'new-password' %>
 
-  <%= f.primary %>
-<% end %>
+      <%= f.primary %>
+    <% end %>
 
-<%= button_to t('common.sign_in'),
-              new_session_path(resource_name),
-              method: :get,
-              class: 'btn btn-secondary my-4' %>
+    <%= button_to t('common.sign_in'),
+                  new_session_path(resource_name),
+                  method: :get,
+                  class: 'btn btn-secondary my-4' %>
+  </div>
+</div>

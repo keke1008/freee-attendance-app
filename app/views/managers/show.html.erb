@@ -11,6 +11,10 @@
   </div>
 </div>
 
+<h2>
+  ID: <%= @manager.id %>
+</h2>
+
 <div class="card shadow">
   <%= turbo_frame_tag 'attendances-chart' do %>
     <div class="card-header d-flex justify-content-between">
@@ -37,12 +41,23 @@
   <% end %>
 </div>
 
-<h2><%= t('common.employee_list') %></h2>
+<div class="card shadow my-4">
+  <div class="card-header d-flex justify-content-between">
+    <div class="lead">
+      <%= t('common.employee_list') %>
+    </div>
+  </div>
 
-<ol class="list-group">
-  <% for employee in @employees %>
-    <li class="list-group-item">
-      <%= link_to employee.name, manager_employee_path(employee) %>
-    </li>
-  <% end %>
-</ol>
+  <div class="card-body">
+    <ol class="list-group">
+      <% for employee in @employees %>
+        <li class="list-group-item">
+          <%= link_to employee.name, manager_employee_path(employee) %>
+        </li>
+      <% end %>
+    </ol>
+    <% if @employees.empty? %>
+      <%= t('common.employee_not_found', id: @manager.id) %>
+    <% end %>
+  </div>
+</div>
