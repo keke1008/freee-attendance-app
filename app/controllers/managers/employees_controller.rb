@@ -10,7 +10,7 @@ class Managers::EmployeesController < ApplicationController
                             .where(date: date_range)
                             .order(:begin_at)
     @shifts = @employee.shifts
-                       .where('begin_at <= ? AND end_at >= ?', date_range.last, date_range.first)
+                       .where(date: date_range)
                        .order(:begin_at)
   end
 

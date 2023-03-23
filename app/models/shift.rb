@@ -1,10 +1,16 @@
 class Shift < ApplicationRecord
+  include ShiftAttendanceRelation
+
   belongs_to :employee
+  has_many :attendances, foreign_key: :employee_id, primary_key: :employee_id, inverse_of: :employee, dependent: nil
+
   before_save :set_duration_sec
   validates :end_at, comparison: { greater_than: :begin_at }
   validate :check_overlapping
 
   scope :collect_duration_sec, -> { eager_load(:employee).group(:employee).sum(:duration_sec) }
+
+  scope :attendance_relations, ->(offset) { with_relation(:shifts, :attendances, Attendance, offset) }
 
   private
 
