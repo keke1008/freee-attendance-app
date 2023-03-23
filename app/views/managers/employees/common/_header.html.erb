@@ -1,0 +1,32 @@
+<div class="row border-bottom border-3 pb-2">
+  <div class="col-1">
+    <i class="bi-exclamation-circle text-danger"></i>
+  </div>
+
+  <div class="col-8 row">
+    <div class="col-4">
+      <%= t('activerecord.attributes.attendance.date') %>
+    </div>
+
+    <div class="col-4">
+      <%= t('activerecord.attributes.attendance.begin_at') %>
+    </div>
+
+    <div class="col-4">
+      <%= t('activerecord.attributes.attendance.end_at') %>
+    </div>
+  </div>
+
+  <% if @page.present? %>
+    <div class="col-3 d-flex justify-content-end gap-2">
+      <%= link_to t('common.add'),
+                  [:new, :manager, @employee, item_name_symbol],
+                  class: 'btn btn-sm btn-outline-primary',
+                  data: { turbo_frame: dom_id(new_item) } %>
+
+      <div class="d-flex justify-content-end">
+        <%= date_pagination_date_nav @page %>
+      </div>
+    </div>
+  <% end %>
+</div>

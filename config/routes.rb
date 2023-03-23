@@ -8,8 +8,12 @@ Rails.application.routes.draw do
     get 'attendances/:employee_id', action: :attendances
 
     resources :employees, controller: 'managers/employees', only: :show do
-      resources :attendances, controller: 'managers/employees/attendances', except: :index
-      resources :shifts, controller: 'managers/employees/shifts', except: :index
+      resources :attendances, controller: 'managers/employees/attendances', except: :index do
+        post 'detail', on: :member
+      end
+      resources :shifts, controller: 'managers/employees/shifts', except: :index do
+        post 'detail', on: :member
+      end
     end
   end
 

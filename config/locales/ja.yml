@@ -8,6 +8,7 @@ ja:
     add: 追加
     delete: 削除
     cancel: キャンセル
+    detail: 詳細
     change_setting: 設定の変更
     account_setting: アカウント設定
     delete_account: アカウントを削除する
@@ -38,6 +39,14 @@ ja:
       manager_not_found: マネージャーが見つかりませんでした
       shift_overlapped: 重複するシフトが存在します
       attendance_overlapped: 重複する勤怠が存在します
+    attendance:
+      not_found: 対応するシフトが見つかりません
+      wrong_time: シフトとの時刻の差が大きすぎます
+      related: 対応するシフト
+    shift:
+      not_found: 対応する勤怠が見つかりません
+      wrong_time: 勤怠との時刻の差が大きすぎます
+      related: 対応する勤怠
 
   date:
     formats:

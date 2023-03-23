@@ -8,10 +8,12 @@ class Managers::EmployeesController < ApplicationController
     date_range = @page.date_range
     @attendances = @employee.attendances
                             .where(date: date_range)
-                            .order(:begin_at)
+                            .order_by_datetime
+                            .eager_load(:overlapped_shifts)
     @shifts = @employee.shifts
                        .where(date: date_range)
-                       .order(:begin_at)
+                       .order_by_datetime
+                       .eager_load(:overlapped_attendances)
   end
 
   private

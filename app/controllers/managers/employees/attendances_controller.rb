@@ -1,6 +1,6 @@
 class Managers::Employees::AttendancesController < ApplicationController
   before_action :set_manager_and_employee
-  before_action :set_attendance, only: %i[show edit update destroy]
+  before_action :set_attendance, only: %i[show edit update destroy detail]
 
   def show; end
 
@@ -33,6 +33,8 @@ class Managers::Employees::AttendancesController < ApplicationController
   def destroy
     @attendance.destroy
   end
+
+  def detail; end
 
   private
 

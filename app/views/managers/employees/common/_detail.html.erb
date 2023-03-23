@@ -1,0 +1,30 @@
+<%= turbo_frame_tag 'modal' do %>
+  <div class="modal fade" data-controller="modal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <% status, related_items = item.relation %>
+
+        <div class="modal-header">
+          <% if status == :missing %>
+            <h5><%= t("errors.#{item_name_symbol}.not_found") %></h5>
+          <% else %>
+            <h5><%= t("errors.#{item_name_symbol}.wrong_time") %></h5>
+          <% end %>
+        </div>
+
+        <div class="modal-body">
+          <%= render 'managers/employees/common/header', item_name_symbol:, new_item: %>
+          <%= render item %>
+
+          <% if status == :wrong_time %>
+
+            <%= t("errors.#{item_name_symbol}.related") %>
+            <% related_items.each do |item| %>
+              <%= render 'managers/employees/common/item_no_status', item: %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

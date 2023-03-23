@@ -1,6 +1,6 @@
 class Managers::Employees::ShiftsController < ApplicationController
   before_action :set_manager_and_employee
-  before_action :set_shift, only: %i[show edit update destroy]
+  before_action :set_shift, only: %i[show edit update destroy detail]
 
   def show; end
 
@@ -29,6 +29,8 @@ class Managers::Employees::ShiftsController < ApplicationController
 
     render :edit, status: :unprocessable_entity
   end
+
+  def detail; end
 
   def destroy
     @shift.destroy
