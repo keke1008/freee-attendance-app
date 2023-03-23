@@ -9,7 +9,7 @@ class EmployeesController < ApplicationController
   def punch_in
     @employee.transaction do
       ongoing_attendance = @employee.ongoing_attendance
-      @employee.create_ongoing_attendance(begin_at: DateTime.now) if ongoing_attendance.nil?
+      @employee.create_ongoing_attendance(begin_at: Time.current) if ongoing_attendance.nil?
       redirect_to @employee
     end
   end
@@ -19,7 +19,8 @@ class EmployeesController < ApplicationController
     @employee.transaction do
       ongoing_attendance = @employee.ongoing_attendance
       unless ongoing_attendance.nil?
-        @employee.attendances.create!(begin_at: ongoing_attendance.begin_at, end_at: DateTime.now)
+        @employee.attendances.create!(date: ongoing_attendance.begin_at.to_date,
+                                      begin_at: ongoing_attendance.begin_at, end_at: Time.current)
         @employee.ongoing_attendance.destroy
       end
 

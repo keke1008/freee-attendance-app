@@ -5,7 +5,7 @@
 <% if @is_in_attendance %>
   <%= button_to punch_out_employee_path,
                 method: :patch,
-                class: 'btn btn-primary',
+                class: 'btn btn-danger',
                 form_class: 'd-grid my-4' do %>
     <h1 class="display-1"><strong>退勤する</strong></h1>
   <% end %>
