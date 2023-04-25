@@ -6,9 +6,11 @@
 
     <%= bootstrap_form_with(model: @employee, url: session_path(resource_name), local: true) do |f| %>
       <%= f.text_field :name, autocomplete: 'name', autofocus: true %>
-      <%= f.email_field :email, autocomplete: 'email' %>
+
       <%= f.password_field :password, autocomplete: 'new-password' %>
+
       <%= f.check_box :remember_me %>
+
       <%= f.primary t('common.sign_in') %>
     <% end %>
 
