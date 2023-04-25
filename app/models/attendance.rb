@@ -19,6 +19,8 @@ class Attendance < ApplicationRecord
     SQL
   }, through: :employee, source: :shifts
 
+  scope :with_overlapped, ->(date) { where(date:).order_by_datetime.eager_load(:overlapped_shifts) }
+
   scope :collect_duration_sec, -> { eager_load(:employee).group(:employee).sum(:duration_sec) }
 
   scope :eager_find, ->(id) { eager_load(:overlapped_shifts).find(id) }

@@ -5,15 +5,7 @@ class Managers::EmployeesController < ApplicationController
 
   def show
     @page = paginate
-    date_range = @page.date_range
-    @attendances = @employee.attendances
-                            .where(date: date_range)
-                            .order_by_datetime
-                            .eager_load(:overlapped_shifts)
-    @shifts = @employee.shifts
-                       .where(date: date_range)
-                       .order_by_datetime
-                       .eager_load(:overlapped_attendances)
+    @date_range = @page.date_range
   end
 
   private

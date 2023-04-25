@@ -14,7 +14,7 @@
 
       <div id="attendances">
         <%= render partial: 'managers/employees/attendances/attendance',
-                   collection: @attendances,
+                   collection: @employee.attendances.with_overlapped(@date_range),
                    as: :attendance %>
       </div>
     <% end %>
@@ -26,7 +26,7 @@
 
       <div id="shifts">
         <%= render partial: 'managers/employees/shifts/shift',
-                   collection: @shifts,
+                   collection: @employee.shifts.with_overlapped(@date_range),
                    as: :shift %>
       </div>
     <% end %>
