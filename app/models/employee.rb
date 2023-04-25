@@ -18,4 +18,10 @@ class Employee < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  def punch_in(begin_at)
+    create_ongoing_attendance(begin_at:) if ongoing_attendance.nil?
+  end
+
+  delegate :punch_out, to: :ongoing_attendance, allow_nil: true
 end

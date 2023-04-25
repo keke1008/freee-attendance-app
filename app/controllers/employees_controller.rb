@@ -7,25 +7,14 @@ class EmployeesController < ApplicationController
 
   # 出勤を記録する
   def punch_in
-    @employee.transaction do
-      ongoing_attendance = @employee.ongoing_attendance
-      @employee.create_ongoing_attendance(begin_at: Time.current) if ongoing_attendance.nil?
-      redirect_to @employee
-    end
+    @employee.punch_in(Time.current)
+    redirect_to @employee
   end
 
   # 退勤を記録する
   def punch_out
-    @employee.transaction do
-      ongoing_attendance = @employee.ongoing_attendance
-      unless ongoing_attendance.nil?
-        @employee.attendances.create!(date: ongoing_attendance.begin_at.to_date,
-                                      begin_at: ongoing_attendance.begin_at, end_at: Time.current)
-        @employee.ongoing_attendance.destroy
-      end
-
-      redirect_to @employee
-    end
+    @employee.punch_out(Time.current)
+    redirect_to @employee
   end
 
   private
