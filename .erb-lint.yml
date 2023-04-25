@@ -1,6 +1,6 @@
 exclude:
-  - '**/vendor/**/*'
-  - '**/node_modules/**/*'
+  - "**/vendor/**/*"
+  - "**/node_modules/**/*"
 EnableDefaultLinters: true
 linters:
   Rubocop:
@@ -13,4 +13,6 @@ linters:
       Layout/InitialIndentation:
         Enabled: false
       Layout/TrailingEmptyLines:
+        Enabled: false
+      Lint/UselessAssignment:
         Enabled: false
